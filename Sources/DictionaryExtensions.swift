@@ -8,10 +8,10 @@
 import UIKit
 
 extension Dictionary {
+   
     /// EZSE: Returns the value of a random Key-Value pair from the Dictionary
-    public func random() -> Value {
-        let index: Int = Int(arc4random_uniform(UInt32(self.count)))
-        return Array(self.values)[index]
+    public func random() -> Value? {
+        return Array(self.values).random()
     }
 
     /// EZSE: Union of self and the input dictionaries.

@@ -39,4 +39,33 @@ extension Collection {
         return indicesArray
     }
 #endif
+    
+}
+
+extension Collection where Iterator.Element == String {
+    //Returns the initials of an array of strings
+    var initials: [String] {
+        return map{ String($0.characters.prefix(1)) }
+    }
+    //This takes an array and returns a dictionary with keys as the first letter and a value of an array of Strings (for use with sectioned tableviews)
+    public func buildIndexedDictionary() -> [String:[String]]{
+        var indexedDic:[String:[String]] = [:]
+        let allInitials = self.initials
+        let initials = Array(Set(allInitials))
+        for one in self{
+            for initial in initials{
+                if String(one.characters.first!) == initial {
+                    if var oneArray = indexedDic[initial] {
+                        oneArray.append(one)
+                        indexedDic[initial] = oneArray
+                    }
+                    else{
+                        let oneArray = [one]
+                        indexedDic[initial] = oneArray
+                    }
+                }
+            }
+        }
+        return indexedDic
+    }
 }

@@ -155,7 +155,41 @@ extension Date {
     public var isThisWeek: Bool {
         return self.minutesInBetweenDate(Date()) <= Double(Date.minutesInAWeek)
     }
-
+    // Returns the int from the weekday
+    func dayNumberOfWeek() -> Int? {
+        return Calendar.current.dateComponents([.weekday], from: self).weekday
+    }
+    
+    // Returns a date from a given amount of days before the used date(self)
+    func dateFromDays(days:Int) -> Date{
+        let seconds = days * -86400 //86400 secs per day
+        return self.addingTimeInterval(TimeInterval(seconds))
+    }
+    /* Copy of toString(format......
+    func ToLocalStringWithFormat(_ dateFormat: String) -> String {
+        // change to a readable time format and change to local time zone
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        dateFormatter.timeZone = TimeZone.autoupdatingCurrent
+        let timeStamp = dateFormatter.string(from: self)
+        return timeStamp
+    }*/
+    
+    func dateArrayFromTwoDates(_ startDate: Date) -> [String]{
+        var arrayOfDates = [String]()
+        var oneDate = startDate
+        let calendar = Calendar.current
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        while oneDate <= self {
+//            arrayOfDates.append(oneDate.ToLocalString("yyyy-MM-dd"))
+            arrayOfDates.append(oneDate.toString(format:"yyyy-MM-dd"))
+            oneDate = calendar.date(byAdding: .day, value: 1, to:oneDate)!
+        }
+        return arrayOfDates
+    }
+    
+    
     /// EZSE: Get the era from the date
     public var era: Int {
         return Calendar.current.component(Calendar.Component.era, from: self)

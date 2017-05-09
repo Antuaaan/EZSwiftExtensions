@@ -14,6 +14,15 @@ extension Double {
 
     /// EZSE: Converts Double to Int
     public var toInt: Int { return Int(self) }
+    
+    //Makes an easily available reference to the max double value
+    static var min = Double.leastNormalMagnitude
+    static var max = Double.greatestFiniteMagnitude
+    
+    var cleanValue: String
+    {
+        return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
+    }
 }
 
 // MARK: - Deprecated 1.8

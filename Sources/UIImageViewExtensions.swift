@@ -94,6 +94,17 @@ extension UIImageView {
             image(url: url)
         }
     }
+    
+    // makes the imageview apply a blurring effect
+    func makeBlurImage(_ targetImageView:UIImageView?)
+    {
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = targetImageView!.bounds
+        
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight] // for supporting device rotation
+        targetImageView?.addSubview(blurEffectView)
+    }
 
     // MARK: Deprecated 1.8
 

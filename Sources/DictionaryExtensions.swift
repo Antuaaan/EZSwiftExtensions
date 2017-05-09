@@ -133,6 +133,28 @@ extension Dictionary {
         }
         return nil
     }
+    
+    //Returns a list of the keys in a Dictionary
+    public func allKeys() -> [String]{
+        var keys :[String] = [String]()
+        for (key,_) in self{
+            let stringKey = String(describing: key)
+            keys.append(stringKey)
+        }
+        
+        return keys
+    }
+    
+    //Returns an alphabetically sorted list of the keys in a Dictionary
+    public func sortedKeys()-> [String]{
+        var keys :[String] = [String]()
+        for (key,_) in self{
+            let stringKey = String(describing: key)
+            keys.append(stringKey)
+        }
+        
+        return keys.sorted()
+    }
 
 }
 
